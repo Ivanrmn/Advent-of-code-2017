@@ -98,6 +98,25 @@ def resolveCaptchaTwo(numbers):
 	outputSum = 0
 	i = 0
 	total = len(numbers)-1
+	mirrorPuzzle = numbers + numbers
+	for num in mirrorPuzzle:
+		if i == total:
+			nextNum = mirrorPuzzle[jumps-1]
+			if num == nextNum:
+				outputSum += int(num)
+			return outputSum
+		else:
+			nextNum = mirrorPuzzle[i+jumps]
+		if num == nextNum:
+			outputSum += int(num)
+		i+=1
+	return outputSum
+
+def resolveCaptchaTwo_solB(numbers):
+	jumps = int(len(numbers)/2)
+	outputSum = 0
+	i = 0
+	total = len(numbers)-1
 	for num in numbers:
 		if i == total:
 			nextNum = numbers[jumps-1]
