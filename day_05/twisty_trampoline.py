@@ -38,7 +38,6 @@
 
 
 def resolve_twisty_trampoline(jumps):
-    mirror_jumps = jumps + jumps
     i = 0
     steps = 0
     OFFSET = 1
