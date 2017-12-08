@@ -15,7 +15,7 @@
 
 # 5 1 9 5
 # 7 5 3
-# 2 4 6 8 
+# 2 4 6 8
 # The first row's largest and smallest values are
 # 9 and 1, and their difference is 8. The second row's largest and
 # smallest values are 7 and 3, and their difference is 4. The third
@@ -24,23 +24,25 @@
 
 import csv
 
+
 def formatTsvToIntArray(path):
-	output = []
-	with open(path) as spreadsheet:
-		tsvreader = csv.reader(spreadsheet, delimiter="\t")
-		for line in tsvreader:
-			for i, element in enumerate(line):
-				line[i] = int(element)
-			output.append(line)
-	return output
+    output = []
+    with open(path) as spreadsheet:
+        tsvreader = csv.reader(spreadsheet, delimiter="\t")
+        for line in tsvreader:
+            for i, element in enumerate(line):
+                line[i] = int(element)
+            output.append(line)
+    return output
+
 
 def resolveChecksum(spreadsheet):
-	checksum = 0
-	for row in spreadsheet:
-		greatest = max(row)
-		minimun = min(row)
-		checksum += greatest-minimun
-	return checksum
+    checksum = 0
+    for row in spreadsheet:
+        greatest = max(row)
+        minimun = min(row)
+        checksum += greatest - minimun
+    return checksum
 
 # --- Part Two ---
 
@@ -61,30 +63,31 @@ def resolveChecksum(spreadsheet):
 
 # For example, given the following spreadsheet:
 
-# 5 9 2 8 
-# 9 4 7 3 
-# 3 8 6 5 
+# 5 9 2 8
+# 9 4 7 3
+# 3 8 6 5
 # In the first row, the only two numbers that
 # evenly divide are 8 and 2; the result of this division is 4. In the
 # second row, the two numbers are 9 and 3; the result is 3. In the third
 # row, the result is 2. In this example, the sum of the results would be
 # 4 + 3 + 2 = 9.
 
+
 def resolveChecksum_partTwo(spreadsheet):
-	'''Para cada fila, cogemos un numero
-	   Recorremos la fila nuevamente comparando el numero escogido con el que 
-	   corresponde en esa vuelta de bucle.
-	   Si el numero es escogido es mayor que el que estamos comparando, 
-	   y tienen indices distintos (es decir, no lo comparamos con el mismo)
-	   y el resto de la division es 0, calculamos la el resultado de la division
-	   y lo sumamos al checksum'''
-	checksum = 0
-	for row in spreadsheet:
-		this_row = row
-		difference = 0
-		for i, this_num in enumerate(row):
-			for j, num in enumerate(this_row):
-				if this_num >= num and i != j and this_num%num == 0:
-					difference = this_num/num
-		checksum += difference
-	return checksum
+    '''Para cada fila, cogemos un numero
+       Recorremos la fila nuevamente comparando el numero escogido con el que 
+       corresponde en esa vuelta de bucle.
+       Si el numero es escogido es mayor que el que estamos comparando, 
+       y tienen indices distintos (es decir, no lo comparamos con el mismo)
+       y el resto de la division es 0, calculamos la el resultado de la division
+       y lo sumamos al checksum'''
+    checksum = 0
+    for row in spreadsheet:
+        this_row = row
+        difference = 0
+        for i, this_num in enumerate(row):
+            for j, num in enumerate(this_row):
+                if this_num >= num and i != j and this_num % num == 0:
+                    difference = this_num / num
+        checksum += difference
+    return checksum
