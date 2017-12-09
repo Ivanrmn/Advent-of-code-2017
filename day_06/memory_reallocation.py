@@ -67,3 +67,36 @@ def memory_reallocation(bank):
         cycles.append(log)
     return steps
 
+
+def get_indexes_of_item_in_array(item, array):
+    indexes = ()
+    mirror = array[:]
+    try:
+        while (mirror.index(item) != -1):
+            i = mirror.index(item)
+            indexes += (i, )
+            mirror[i] = None
+    except ValueError:
+        return indexes
+
+
+def memory_reallocation_v2(bank):
+    cycles = []
+    current_cycle = bank
+    while (cycles.count(current_cycle) < 2):
+        greatest = max(bank)
+        i = current_cycle.index(greatest)
+        current_cycle[i] = 0
+        i += 1
+        slots = len(bank)
+        while (i <= slots and greatest > 0):
+            if i == slots:
+                i = 0
+            greatest -= 1
+            current_cycle[i] += 1
+            i += 1
+        log = current_cycle[:]
+        cycles.append(log)
+    indexes = get_indexes_of_item_in_array(cycles[-1], cycles)
+    loops = indexes[1] - indexes[0]
+    return loops
